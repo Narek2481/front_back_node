@@ -2,6 +2,7 @@ import express from "express";
 const app = express();
 
 app.use(express.static("public"));
+app.use(express.json());
 app.get("/",(req,res)=>{
     req.redirect("/index.html")
 });
@@ -12,15 +13,11 @@ app.get("/bye",(req,res)=>{
 });
 
 app.post("/hi",(req,res)=>{
-    let data = "";
-    req.on("data", (into)=>{
-        data+= into;
-    });
-    req.on("end",()=>{
-        let obj = JSON.parse(data);
-        console.log(obj.name);
-        res.send("good");
-    })
+   
+        
+    console.log(req.body.name);
+    res.send("good");
+    
     
 })
 
